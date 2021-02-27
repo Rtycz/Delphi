@@ -1,0 +1,112 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 240
+  ClientWidth = 493
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 73
+    Height = 13
+    Caption = #1042#1074#1077#1076#1080#1090#1077' '#1093#1086#1089#1090':'
+  end
+  object Edit1: TEdit
+    Left = 87
+    Top = 8
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    OnKeyPress = Edit1KeyPress
+  end
+  object Button1: TButton
+    Left = 228
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = #1053#1072#1095#1072#1090#1100
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+  object IBDatabase1: TIBDatabase
+    DatabaseName = 'C:\Delphi\Delivery.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'lc_ctype=WIN1251'
+      'password=masterkey')
+    LoginPrompt = False
+    ServerType = 'IBServer'
+    Left = 24
+    Top = 56
+  end
+  object IdUDPServer1: TIdUDPServer
+    Active = True
+    Bindings = <>
+    DefaultPort = 11001
+    OnUDPRead = IdUDPServer1UDPRead
+    Left = 168
+    Top = 56
+  end
+  object IdUDPClient1: TIdUDPClient
+    Active = True
+    Port = 11000
+    Left = 96
+    Top = 56
+  end
+  object IdHTTPServer1: TIdHTTPServer
+    Active = True
+    Bindings = <>
+    DefaultPort = 7777
+    AutoStartSession = True
+    OnCommandGet = IdHTTPServer1CommandGet
+    Left = 256
+    Top = 56
+  end
+  object IBEvents1: TIBEvents
+    AutoRegister = False
+    Database = IBDatabase1
+    Events.Strings = (
+      'ADD_WORKER'
+      'BEGIN_DAY_DRIVER'
+      'DELETE_WORKER'
+      'EDIT_DRIVER_SET_CAR'
+      'EDIT_DRIVER_SET_SCHEDULE'
+      'EDIT_WORKER')
+    Registered = False
+    OnEventAlert = IBEvents1EventAlert
+    Left = 56
+    Top = 112
+  end
+  object IBQuery1: TIBQuery
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 216
+    Top = 112
+  end
+  object IBEvents2: TIBEvents
+    AutoRegister = False
+    Database = IBDatabase1
+    Events.Strings = (
+      'ADD_ADDRESS'
+      'ADD_CAR'
+      'ADD_CUSTOMER'
+      'ADD_ORDER'
+      'EDIT_ORDER'
+      'UPDATE_STATUS')
+    Registered = False
+    OnEventAlert = IBEvents2EventAlert
+    Left = 128
+    Top = 112
+  end
+end
